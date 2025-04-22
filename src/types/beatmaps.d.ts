@@ -117,3 +117,5 @@ declare type mods =
   | 'nomod'
 
 declare type OsuRanks = 'D' | 'C' | 'B' | 'A' | 'S' | 'SS' | 'SH' | 'SSH'
+
+declare type Ruleset = 'fruits' | 'osu' | 'taiko' | 'mania'

@@ -209,3 +209,31 @@ interface UserAchievement {
   achieved_at: Date
   achievement_id: number
 }
+
+declare interface ActivityParams{
+  limit: number
+  offset: number
+}
+
+
+declare interface RecentUserActivity {
+  created_at: Date;
+  createdAt:  Date;
+  id:         number;
+  type:       string;
+  scoreRank:  string;
+  rank:       number;
+  mode:       string;
+  beatmap:    Beatmap;
+  user:       UserActivity;
+}
+
+interface BeatmapActivity {
+  title: string;
+  url:   string;
+}
+
+interface UserActivity {
+  username: string;
+  url:      string;
+}

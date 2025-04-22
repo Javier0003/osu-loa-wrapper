@@ -1,30 +1,8 @@
 import fetchWithUrl from '../utils/fetch-with-url'
 import TokenManager from '../utils/token-manager'
+import TokenizedClass from '../utils/tokenized-class'
 
-export default class OsuClient {
-  private readonly _clientId: number
-  private readonly _clientSecret: string
-  private token: string | null = null
-
-  constructor(clientId: number, clientSecret: string) {
-    this._clientSecret = clientSecret
-    this._clientId = clientId
-    TokenManager.init(clientId, clientSecret)
-  }
-
-  @TokenManager.TokenValidator
-  public async getOsuMap(id: number): Promise<Beatmap> {
-    const res = await fetchWithUrl<Beatmap>(`beatmaps/${id}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token}`,
-      },
-    })
-    return res
-  }
-
+export default class UserManager extends TokenizedClass {
   @TokenManager.TokenValidator
   async getOsuRecent(user: number): Promise<Score[]> {
     const json = await fetchWithUrl<Score[]>(
@@ -58,19 +36,6 @@ export default class OsuClient {
   }
 
   @TokenManager.TokenValidator
-  async GetMapById(mapId: number): Promise<Beatmap> {
-    const data = await fetchWithUrl<Beatmap>(`beatmaps/${mapId}`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token}`,
-      },
-    })
-    return data
-  }
-
-  @TokenManager.TokenValidator
   async getUserData(value: number) {
     const res = await fetchWithUrl<UserData>(`users/${value}/osu`, {
       headers: {
@@ -84,20 +49,16 @@ export default class OsuClient {
   }
 
   @TokenManager.TokenValidator
-  async checkDifficultyRating(id: number, selectedMods: mods[]) {
-    const data = await fetchWithUrl<BeatmapAttributes>(`beatmaps/${id}/attributes`, {
-      method: 'POST',
+  async getUserRecentActivity(id: number, params?: ActivityParams): Promise<RecentUserActivity> {
+    const res = await fetchWithUrl<RecentUserActivity>(`users/${id}/recent_activity`, {
       headers: {
-        Accept: 'application/json',
         'Content-Type': 'application/json',
+        Accept: 'application/json',
         Authorization: `Bearer ${this.token}`,
       },
-      body: JSON.stringify({
-        ruleset: 'osu',
-        mods: selectedMods,
-      }),
+      body: params ? JSON.stringify(params) : undefined,
     })
 
-    return data
+    return res
   }
 }
