@@ -1,4 +1,4 @@
-export default class InvalidToken extends Error{
+export default class InvalidToken extends Error {
   constructor(message?: string) {
     super(message)
     this.name = 'InvalidToken'

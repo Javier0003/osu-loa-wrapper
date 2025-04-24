@@ -1,14 +1,16 @@
 import { OAUTH_URL } from '../constants'
 import InvalidToken from './invalid-token'
-
-interface TokenizedClass {
-  token: string | null
-}
+import TokenizedClass from './tokenized-class'
 
 export default class TokenManager {
   private static osuBody: string
   private static osuToken: string | null = null
 
+  /**
+   * @description Initializes the TokenManager with the client ID and secret.
+   * @param clientId - The client ID of the osu! API application.
+   * @param clientSecret - The client secret of the osu! API application.
+   */
   static init(clientId: number, clientSecret: string) {
     this.osuBody = new URLSearchParams({
       client_id: clientId.toString(),
@@ -18,6 +20,10 @@ export default class TokenManager {
     }).toString()
   }
 
+  /**
+   * @description Fetches the osu token from the API.
+   * @returns {Promise<string>} The osu token.
+   */
   static async getOsuToken(): Promise<string> {
     if (this.osuToken) return this.osuToken
 
@@ -36,6 +42,12 @@ export default class TokenManager {
     return TokenManager.osuToken
   }
 
+  /**
+   * @description Decorator to validate the token before making a request.
+   * @param target - The target class.
+   * @param propertyKey - The name of the method.
+   * @param descriptor - The method descriptor.
+   */
   public static TokenValidator(
     target: any,
     propertyKey: string,
