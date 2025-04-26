@@ -80,7 +80,7 @@ export default class TokenManager {
 
           throw error
         } finally {
-          this.token == null
+          this.token = null
         }
       }
     }

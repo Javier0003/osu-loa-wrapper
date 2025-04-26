@@ -177,9 +177,7 @@ Need more deets? Check the `src/types/` folder 📁 or the `dist/index.d.ts` fil
 2.  `cd javier0003-osu-loa-wrapper` 📂.
 3.  Install the node_modules stuff 📦:
     ```bash
-    npm install # classic 🙏
-    # or yarn if you're fancy ✨
-    yarn install
+    pnpm install # classic 🙏
     ```
 4.  Make a `.env` file in the main folder 📄. Put your secrets in it:
     ```env
@@ -188,15 +186,15 @@ Need more deets? Check the `src/types/` folder 📁 or the `dist/index.d.ts` fil
     ```
 5.  **Run Tests:**🧪 Does it even work? 🤔
     ```bash
-    npm test
+    pnpm test
     ```
 6.  **Build:**🏗️ Make the JS files for the plebs ✨.
     ```bash
-    npm run build
+    pnpm build
     ```
 7.  **Run Dev:** ▶️ Test your changes live 🔥.
     ```bash
-    npm run dev
+    pnpm dev
     ```
 
 ## Contributing 🤝🥺👉👈

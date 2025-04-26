@@ -1,6 +1,6 @@
 {
   "name": "osu-loa-wrapper",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A wrapper for the osu! it isn't done yet, I just ported it from my other project to make it easier to maintain",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
